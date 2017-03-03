@@ -1,0 +1,62 @@
+jaw master class notes ----------------------------
+
+Layers ----------
+
+Bare Metal - CPU and memory & BIOS
+Operating system - Kernel - manages hardware
+system libraries layer - common code fragments grouped into a library
+programs & application layer libraries - c asm java
+
+Fake-simple-computer  +++++++++++++++++++++++++++++++++
+
+CPU / Memory
+Memory ------------------
+
++--------+
+| 8 bits | drawer 3
++--------+
+| 8 bits | drawer 2
++--------+
+| 8 bits | drawer 1
++--------+
+| 8 bits | drawer 0
++--------+
+
+CPU -----------------------
+a set of registers - differs among chip makers
+a arithmeic-logic unit (ALU) - add / subtract / multiply / and / or / xor
+control unit - branch prediction unit / cache management / bus signaling, pipeline management / memory management.
+control unit is in charge of reading the program from memory, parsing it and executing the machine code
+
+machine code --------------------------------------
+
+Instruction pointer or program counter - special register in the CPU that indicates which memory address in the main memory contains the next instruction to run
+when processor executes IP is increased by 1, or more than 1 if instruction takes several bytes or a branch / jump. in which case new value is assigned to IP
+
+
+OPCODE     | MNEMONIC    | Description
+---------------------------------------------------------
+0xbb XX    | MOV EBX, XX | Copies the value XX into register EBX
+0xbd XX    | MOV EBP, X  | Copies the value XX into register EBP
+0x01 XX YY | ADD XX, YY  | adds the values of register xx and yy, results stored in reigster XX
+0x90       | NOP         | No operation
+0x00       | HALT        |
+
+ASM       Machine Code
+MOV EBX, 10  -> 0xbb 0x0a
+MOV EBP, 20  -> 0xbd 0x14
+ADD EBX, EBP -> 0x01 0x00 0x01
+HALT         -> 0xff
+
+put into memory
+ADDR-07 | 0xff |
+ADDR-06 | 0x01 |
+ADDR-05 | 0x00 |
+ADDR-04 | 0x01 |
+ADDR-03 | 0x14 |
+ADDR-02 | 0xbd |
+ADDR-01 | 0x0a |
+ADDR-00 | 0xbb | <= RIP
+
+
+
